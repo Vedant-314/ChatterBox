@@ -5,17 +5,21 @@ import RegisterPage from "./authPages/RegisterPage/RegisterPage";
 import Dashboard from "./dashboard/Dashboard";
 
 import "./App.css";
+import AlertNotifications from "./shared/components/AlertNotifications";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </Router>
+      <AlertNotifications/>
+    </> 
   );
 }
 
