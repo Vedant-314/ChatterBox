@@ -10,7 +10,7 @@ export const getActions = (dispatch) => {
     login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
     register: (userDetails, navigate) =>
       dispatch(register(userDetails, navigate)),
-    setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails))
+    setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
 
@@ -23,13 +23,14 @@ const setUserDetails = (userDetails) => {
 
 const login = (userDetails, navigate) => {
   return async (dispatch) => {
-    const res = await api.login(userDetails);
-    console.log(res);
-    if (res.error) {
-      dispatch(openAlertMessage(res?.err?.response?.data));
+    const response = await api.login(userDetails);
+    console.log(response);
+    if (response.error) {
+      dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const { userDetails } = res?.data;
+      const { userDetails } = response?.data;
       localStorage.setItem("user", JSON.stringify(userDetails));
+
       dispatch(setUserDetails(userDetails));
       navigate("/dashboard");
     }
@@ -38,12 +39,14 @@ const login = (userDetails, navigate) => {
 
 const register = (userDetails, navigate) => {
   return async (dispatch) => {
-    const res = await api.register(userDetails);
-    if (res.error) {
-      dispatch(openAlertMessage(res?.exception?.response?.data));
+    const response = await api.register(userDetails);
+    console.log(response);
+    if (response.error) {
+      dispatch(openAlertMessage(response?.exception?.response?.data));
     } else {
-      const { userDetails } = res?.data;
+      const { userDetails } = response?.data;
       localStorage.setItem("user", JSON.stringify(userDetails));
+
       dispatch(setUserDetails(userDetails));
       navigate("/dashboard");
     }

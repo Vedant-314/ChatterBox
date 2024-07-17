@@ -6,7 +6,8 @@ import AppBar from './AppBar/AppBar';
 import Messenger from './Messenger/Messenger';
 import { logout } from '../shared/utils/auth';
 import {connect} from "react-redux";
-import { getActions } from '../store/actions/alertActions';
+import { getActions } from '../store/actions/authActions';
+import { connectWithSocketServer } from '../realtimeCommunication/socketConnection';
 
 const Wrapper = styled('div')({
   width: "100%",
@@ -14,7 +15,7 @@ const Wrapper = styled('div')({
   display: 'flex',
 })
 
-const Dashboard = ({setUserDetails}) => {
+const Dashboard = ({ setUserDetails }) => {
 
   useEffect(() => {
     const userDetails = localStorage.getItem('user');
@@ -24,9 +25,10 @@ const Dashboard = ({setUserDetails}) => {
     }
     else{
       setUserDetails(JSON.parse(userDetails));
+      connectWithSocketServer(JSON.parse(userDetails));
     }
   })
-
+ 
 
   return (
     <Wrapper>
@@ -40,8 +42,8 @@ const Dashboard = ({setUserDetails}) => {
 
 const mapActionsToProps = (dispatch) => {
   return {
-    ...getActions(dispatch)
-  }
-}
+    ...getActions(dispatch),
+  };
+};
 
-export default connect(null, mapActionsToProps)(Dashboard)
+export default connect(null, mapActionsToProps)(Dashboard);
