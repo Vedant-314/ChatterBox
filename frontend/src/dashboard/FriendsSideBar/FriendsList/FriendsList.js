@@ -3,29 +3,6 @@ import { styled } from '@mui/system';
 import FriendListItem from './FriendListItem';
 import {connect} from "react-redux";
 
-// const DUMMY_FRIENDS = [
-//   {
-//     id: 1,
-//     username: 'Mark',
-//     isOnline: true
-//   },
-//   {
-//     id: 2,
-//     username: 'Anna',
-//     isOnline: false
-//   },
-//   {
-//     id: 3,
-//     username: 'John',
-//     isOnline: false
-//   },
-//   {
-//     id: 4,
-//     username: 'Mathew',
-//     isOnline: true
-//   }
-// ]
-
 const MainContainer = styled('div')({
     flexGrow: 1,
     width: '100%'
